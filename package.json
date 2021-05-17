@@ -1,0 +1,23 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:create": "npx sequelize db:create",
+    "db:migrate": "npx sequelize db:migrate",
+    "db:seed:all": "npx sequelize db:seed:all",
+    "db:drop": "npx sequelize db:drop"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^9.0.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2",
+    "sequelize-cli": "^6.2.0",
+    "sqlite3": "^5.0.2"
+  }
+}
