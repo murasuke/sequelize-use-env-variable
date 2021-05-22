@@ -1,10 +1,10 @@
-# sequelizeを環境変数から設定する方法(config.use_env_variable)
+# 環境変数でsequelizeを設定する方法(config.use_env_variable)
 
 ## 前書き
 
 * sequelizeはcliを利用することで、設定ファイル(config.json)、Model、Migration、Seederのひな形を作ることができて便利ですが、DB接続設定がファイルに直書きされるため不便な場合があります。
 
-* ひな形の'./models/index.js'を見ると下記の箇所で環境変数から読み込むコードがありますが、デッドコードです。これを利用して環境変数から接続設定を読み込むように書き換えます。
+* ひな形の'./models/index.js'には環境変数から読み込むコードがありますが、デッドコードになっています。これを利用して環境変数から接続設定を読み込むように書き換えます。
 
 
 ```javascript
@@ -15,7 +15,7 @@ if (config.use_env_variable) {
 
 * 環境変数から値を取得するようにconfig.jsonファイルを変更します。
 
-  下記のような感じに変更して、環境変数`DB_CONNECTION_URI`にDB接続URIをセットしてあげます。
+  プロパティー'use_env_variable'で、利用する環境変数名を指定します。
 
 ```json
   "development": {
@@ -25,7 +25,7 @@ if (config.use_env_variable) {
 
 ### 前提
 
-* gitbashでコマンドを利用する前提で書いてあります。
+* コマンドはgitbashを利用する前提で書いてあります。
 
 ## 準備
 
@@ -42,7 +42,7 @@ if (config.use_env_variable) {
 docker run --name mysqlcontainer -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=DB_NAME -p 3306:3306 mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
 ```
 
-* sequelizeをインストールします。
+* sequelizeをインストール
 
 ```bash
 npm init -y
@@ -52,7 +52,7 @@ npm install sequelize sequelize-cli mysql2
 
 * `.sequelizerc`を作成し、sequelize関連ファイルを(./sequelize)配下にまとめる
 
-  プロジェクトのルートフォルダに `.sequelizerc`ファイルを作成し、設定ファイル、model、migration、seeederの各フォルダを明示的に指定します。
+  プロジェクトのルートフォルダに `.sequelizerc`ファイルを作成し、設定ファイル、model、migration、seeederの各フォルダを指定します。
 
 
 ```bash
@@ -72,7 +72,7 @@ module.exports = {
 
 ### sequelize初期化
 
-```
+```bash
 npx sequelize init
 ```
 
@@ -91,7 +91,7 @@ npx sequelize init
 
 * 書き換え前(生成直後)
   
-  接続設定がファイル直書きになっています。ソース管理をしていて、環境ごとに書き換えたい場合に不便です。
+  設定がファイル直接記載されています。ソース管理をしている場合、環境ごと書き換えが発生するので不便です。
 
 ```json
 {
@@ -123,7 +123,7 @@ npx sequelize init
 
 * 書き換え後
 
-`DB_CONNECTION_URI`はMySQLを設定する環境変数の名前です。
+`DB_CONNECTION_URI`はMySQLを設定する環境変数の名前です。プログラム実行前に設定する必要があります。
 
 ```json
 {
@@ -240,7 +240,7 @@ const db = require('./sequelize/models/index'); // cliでinitした時に作成�
 
 ```
 
-実行
+* 実行結果
 ```js
 $ node index.js
 Executing (default): SELECT `id`, `name`, `birth`, `email`, `createdAt`, `updatedAt` FROM `Users` AS `User`;
