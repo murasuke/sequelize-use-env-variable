@@ -1,10 +1,13 @@
 {
-  "name": "test",
+  "name": "sequelize-use-env-variable-test",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "mysql:install": "docker run --name mysqlcontainer -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=DB_NAME -p 3306:3306 mysql:5.7 --character-set-server=utf8mb4 --collation-server=utf8mb4_bin",
+    "mysql:remove": "docker rm mysqlcontainer",
+    "mysql:start": "docker restart mysqlcontainer",
+    "mysql:stop": "docker stop mysqlcontainer",
     "db:create": "npx sequelize db:create",
     "db:migrate": "npx sequelize db:migrate",
     "db:seed:all": "npx sequelize db:seed:all",
@@ -14,10 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^9.0.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.2",
-    "sequelize-cli": "^6.2.0",
-    "sqlite3": "^5.0.2"
+    "sequelize-cli": "^6.2.0"
   }
 }
