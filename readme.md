@@ -1,5 +1,7 @@
 # 環境変数でsequelizeを設定する方法(config.use_env_variable)
 
+[.envで接続を切り替える方法](https://github.com/murasuke/dotenv-sequelize)
+
 ## 前書き
 
 * sequelizeはcliを利用することで、設定ファイル(config.json)、Model、Migration、Seederのひな形を作ることができて便利ですが、DB接続設定がファイルに直書きされるため不便な場合があります。
