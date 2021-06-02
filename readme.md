@@ -1,6 +1,6 @@
 # 環境変数でsequelizeを設定する方法(config.use_env_variable)
 
-[.envで接続を切り替える方法](https://github.com/murasuke/dotenv-sequelize)
+[.envで接続を切り替える方法](https://github.com/murasuke/dotenv-sequelize) はこちらです
 
 ## 前書き
 
